@@ -23,6 +23,8 @@ tg?.expand();
 
 let telegram_id = tg?.initDataUnsafe?.user?.id;
 
+alert("Telegram ID: " + telegram_id);
+
 async function tap() {
     if (!telegram_id) {
         alert("Open this inside Telegram Mini App");
