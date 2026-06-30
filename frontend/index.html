@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arena Serpentarius</title>
+</head>
+<body>
+
+<h1>🐍 Arena Serpentarius</h1>
+
+<p id="points">Points: 0</p>
+<p id="energy">Energy: 0</p>
+<p id="xp">XP: 0</p>
+<p id="level">Level: 0</p>
+
+<button onclick="tap()">TAP</button>
+
+<script>
+let tg = window.Telegram?.WebApp;
+
+tg?.expand();
+
+let telegram_id = tg?.initDataUnsafe?.user?.id;
+
+async function tap() {
+    if (!telegram_id) {
+        alert("Open this inside Telegram Mini App");
+        return;
+    }
+
+    let res = await fetch(`/tap?telegram_id=${telegram_id}`, {
+        method: "POST"
+    });
+
+    let data = await res.json();
+
+    document.getElementById("points").innerText = "Points: " + data.points;
+    document.getElementById("energy").innerText = "Energy: " + data.energy;
+    document.getElementById("xp").innerText = "XP: " + data.xp;
+    document.getElementById("level").innerText = "Level: " + data.level;
+}
+</script>
+
+</body>
+</html>
