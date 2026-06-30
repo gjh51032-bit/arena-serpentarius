@@ -45,8 +45,10 @@ def tap_user(telegram_id: str):
         user = db.query(User).filter(User.telegram_id == telegram_id).first()
 
         if not user:
-            db.close()
-            return {"error": "User not found"}
+            user = User(telegram_id=telegram_id)
+            db.add(user)
+            db.commit()
+            db.refresh(user)
 
         update_energy(user)
 
