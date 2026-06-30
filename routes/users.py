@@ -53,3 +53,19 @@ def create_user(telegram_id: str):
     db.close()
 
     return data
+
+@router.delete("/delete_user")
+def delete_user(telegram_id: str):
+    db = SessionLocal()
+
+    user = db.query(User).filter(User.telegram_id == telegram_id).first()
+
+    if not user:
+        db.close()
+        return {"error": "User not found"}
+
+    db.delete(user)
+    db.commit()
+    db.close()
+
+    return {"status": "User deleted"}
