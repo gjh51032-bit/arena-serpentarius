@@ -37,6 +37,8 @@ async function tap() {
 
     let data = await res.json();
 
+    alert(JSON.stringify(data));
+
     document.getElementById("points").innerText = "Points: " + data.points;
     document.getElementById("energy").innerText = "Energy: " + data.energy;
     document.getElementById("xp").innerText = "XP: " + data.xp;
